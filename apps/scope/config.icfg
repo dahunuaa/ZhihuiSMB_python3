@@ -1,0 +1,35 @@
+#model
+model:'scope'
+version:'0.0.1'
+
+scope_roles:['superuser','scope','normal',
+             'user','business','inforgather','feedback','notice','noticeread','user_admin','business_admin',
+             'inforgather_admin','inforguide','inforguide_admin','feedback_admin','notice_admin','noticeread_admin',
+             'comment','comment_admin','file','file_admin','msgunread','msgunread_admin','like','like_admin','report',
+             'report_admin','reply_comment','evalute','scapy','ptos','ptos_admin','ptosadd','ptosadd_admin','ptosresult',
+             'ptosresult_admin','inforshare','inforshare_admin','msgsend_admin','msgsend'
+             ]
+
+init_scope:{
+"normal":{
+        "name":"normal",
+        "roles":['user','business','inforgather','inforguide','feedback''notice','noticeread','comment','file','msgunread','msgunread_admin',
+                'like','report','reply_comment','scapy','ptos','ptosadd','ptosresult','inforshare','msgsend']
+        },
+"backend":{
+        "name":"backend",
+        "roles":['user','business','business_admin','inforgather_admin','inforgather','inforguide','inforguide_admin',
+        'feedback','feedback_admin','notice','notice_admin','noticeread','noticeread_admin','comment','comment_admin',
+        'file','file_admin','msgunread','msgunread_admin','like','like_admin','report','report_admin','reply_comment'
+        'evalute','scapy','ptos','ptos_admin','ptosadd','ptosadd_admin','ptosresult','ptosresult_admin','inforshare',
+        'inforshare_admin','msgsend_admin','msgsend']
+        },
+"admin":{
+        "name":"admin",
+        "roles":['superuser','user','user_admin','business','business_admin','inforgather','inforgather_admin','inforguide',
+        'inforguide_admin','feedback','feedback_admin','notice','notice_admin','noticeread','noticeread_admin','comment','comment_admin',
+        'file','file_admin','msgunread','msgunread_admin','like','like_admin','report','report_admin','reply_comment',
+        'evalute','scapy','ptos','ptos_admin','ptosadd','ptosadd_admin','ptosresult','ptosresult_admin','inforshare','inforshare_admin',
+        'msgsend_admin','msgsend']
+        }
+  }
