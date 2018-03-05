@@ -22,7 +22,10 @@ class UploadFileHandler(MultiStandardHandler,TokenHandler):
         #提取表单中‘name’为‘file’的文件元数据
         file_metas=self.request.files['file']
         for meta in file_metas:
-            filename=meta['filename']
+            if meta['filename'].split(".")[1]=="MOV" or meta['filename'].split(".")[1]=="mov" :
+                filename=meta['filename'].split(".")[0]+".mp4"
+            else:
+                filename = meta['filename']
             newfilename=self.user_id+'_'+str(utils.get_local_timestamp())
             filepath=os.path.join(upload_path,filename)#将filename改为newfilename
             file = {
