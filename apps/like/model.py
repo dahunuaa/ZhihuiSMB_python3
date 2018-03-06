@@ -52,10 +52,12 @@ class LikeModel(model.StandCURDModel):
         inforshare_like_detail=[]
         for i in like_coll["ptos_like"]:
             _ptos=ptos_coll.find_one({"_id":utils.create_objectid(i)})
-            ptos_like_detail.append(_ptos)
+            if _ptos:
+                ptos_like_detail.append(_ptos)
         for j in like_coll["inforshare_like"]:
-            _infoeshare = inforshare_coll.find_one({"_id":utils.create_objectid(j)})
-            inforshare_like_detail.append(_infoeshare)
+            _inforshare = inforshare_coll.find_one({"_id":utils.create_objectid(j)})
+            if _inforshare:
+                inforshare_like_detail.append(_inforshare)
 
         like_coll=utils.dump(like_coll)
         ptos_like_detail=utils.dump(ptos_like_detail)
