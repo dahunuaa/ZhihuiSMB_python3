@@ -12,6 +12,7 @@ class InforshareModel(model.StandCURDModel):
         ("images_list",ListDT()),
         ("filename", StrDT()),
         ("filepath", StrDT()),
+        ("filesize", StrDT()),
     ]
 
     def before_create(self,object):

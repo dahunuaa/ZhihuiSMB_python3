@@ -28,9 +28,11 @@ class UploadFileHandler(MultiStandardHandler,TokenHandler):
                 filename = meta['filename']
             newfilename=self.user_id+'_'+str(utils.get_local_timestamp())
             filepath=os.path.join(upload_path,filename)#将filename改为newfilename
+            filesize=str(round(len(meta['body'])/(1024*1024),2))
             file = {
                 "file_name" :filename,
                 "file_path":filepath,
+                "file_size": filesize,
                 "add_time":time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),
                 "add_user_id":self.user_id,
             }
@@ -39,7 +41,7 @@ class UploadFileHandler(MultiStandardHandler,TokenHandler):
             write_path = relative_path+filename#将filename改为newfilename
             with open(write_path,'wb') as up:
                 up.write(meta['body'])
-        self.result["data"] = {"file_name":filename,"file_path":filepath}
+        self.result["data"] = {"file_name":filename,"file_path":filepath,"file_size":filesize}
         self.finish(self.result)#此处用self.result['data']形式，回调函数是json类型，如果直接是result，回调函数的数据类型是text
 
 class DownloadFilesHandler(TokenHandler,MultiStandardHandler):

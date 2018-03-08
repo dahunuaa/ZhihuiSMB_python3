@@ -8,7 +8,8 @@ class FileModel(model.StandCURDModel):
     _coll_name = "file"
     _columns = [
         ("file_name",StrDT()),
-        ("file_path",StrDT())
+        ("file_path",StrDT()),
+        ("file_size", StrDT())
 
     ]
 

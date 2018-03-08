@@ -119,8 +119,8 @@ my_queue = my_account.get_queue(qname)
 ### 当队列中没有消息时，请求在MNS服务器端挂3秒钟，在这期间，有消息写入队列，请求会立即返回消息，3秒后，请求返回队列没有消息；
 
 wait_seconds = 3
-print "%sReceive And Delete Message From Queue%s\nQueueName:%s\nWaitSeconds:%s\n" % (
-    10 * "=", 10 * "=", qname, wait_seconds)
+print("%sReceive And Delete Message From Queue%s\nQueueName:%s\nWaitSeconds:%s\n" % (
+    10 * "=", 10 * "=", qname, wait_seconds))
 while True:
     # 读取消息
     try:
@@ -148,12 +148,12 @@ while True:
             print "Queue is empty! sleep 10s"
             time.sleep(10)
             continue
-        print "Receive Message Fail! Exception:%s\n" % e
+        print("Receive Message Fail! Exception:%s\n" % e)
         continue
 
     # 删除消息
     try:
         my_queue.delete_message(recv_msg.receipt_handle)
-        print "Delete Message Succeed!  ReceiptHandle:%s" % recv_msg.receipt_handle
+        print("Delete Message Succeed!  ReceiptHandle:%s" % recv_msg.receipt_handle)
     except MNSExceptionBase, e:
-        print "Delete Message Fail! Exception:%s\n" % e
+        print("Delete Message Fail! Exception:%s\n" % e)

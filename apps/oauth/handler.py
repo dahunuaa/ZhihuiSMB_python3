@@ -6,7 +6,7 @@ from ZhihuiSMB.libs.oauthlib import get_provider
 
 class OauthHandler(MultiStandardHandler,TokenHandler):
     _model = "oauth.OauthAccessTokenModel"
-    enable_methods = ["post"]
+    enable_methods = ["post","get"]
 
     # def _post(self):
     #     user_model = BaseModel.get_model("user.UserModel")
@@ -14,6 +14,6 @@ class OauthHandler(MultiStandardHandler,TokenHandler):
     #     self.result["data"] = user
 
 handlers = [
-    (r'',OauthHandler,get_provider('normal')),
+    (r'',OauthHandler,get_provider('oauth')),
     (r'/token',OAuth2Handler,get_provider())
 ]
