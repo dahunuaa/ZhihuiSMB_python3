@@ -20,6 +20,7 @@ class UserModel(model.StandCURDModel):
         ("job_no",StrDT(required=True)),
         ("sex",StrDT()),
         ("tel", StrDT()),
+        ("group", StrDT()),
         ("depart", StrDT()),
         ("gongzuozu", StrDT()),
         ("position",StrDT()),
@@ -70,12 +71,12 @@ class UserModel(model.StandCURDModel):
         if job_no is not None:
             user = self.coll.find_one({"job_no":job_no,"enable_flag":1})
             if user is not None:
-                raise ValueError(u"该工号已被使用！")
+                raise ValueError(u"The job number is registered！")
 
         if mobile is not None:
             user = self.coll.find_one({"mobile":mobile,"enable_flag":1})
             if user is not None:
-                raise ValueError(u"该手机号已经注册")
+                raise ValueError(u"The mobile number is registered")
             else:
                 self._arguments['login_name'] = u"%s****%s"%(mobile[0:3],mobile[-3:])
                 user=self._create()
@@ -100,6 +101,7 @@ class UserModel(model.StandCURDModel):
         user = super(UserModel,self)._new()
         noticeread_coll = model.BaseModel.get_model("noticeread.NoticereadModel").get_coll()
         msgunread_coll = model.BaseModel.get_model("msgunread.MsgunreadModel").get_coll()
+        like_coll = model.BaseModel.get_model("like.LikeModel").get_coll()
         if user['name'] =='':
             user['name'] = user['job_no']
         _noticeread = {
@@ -114,8 +116,14 @@ class UserModel(model.StandCURDModel):
             "ptos_unread":[],
             "inforshare_unread": []
         }
+        _like = {
+            "user_id":user['job_no'],
+            "ptos_like":[],
+            "inforshare_like":[],
+        }
         noticeread_coll.save(_noticeread)
         msgunread_coll.save(_msgunread)
+        like_coll.save(_like)
         user['birthday'] = user['password']
         user['password'] = utils.generate_password(user['password'],user['job_no'])
         return user
